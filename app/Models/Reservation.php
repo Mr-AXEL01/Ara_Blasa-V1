@@ -24,4 +24,9 @@ class Reservation extends Model
     {
         return $this->hasOne(Review::class);
     }
+
+    public function frequentTrip()
+    {
+        return $this->belongsTo(FrequentTrip::class);
+    }
 }

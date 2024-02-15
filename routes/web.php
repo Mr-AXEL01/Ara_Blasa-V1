@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DriverController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,10 +23,14 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth' , 'verified')->group(function () {
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+// ------------driver----------------------
+    Route::patch('/driver/update-availability', [DriverController::class, 'updateAvailability'])->name('driver.update.availability');
 });
 
 require __DIR__.'/auth.php';
@@ -34,10 +39,7 @@ Route::get('/driver/dashboard', function () {
     return view('driver.dashboard');
 })->name('driver.dashboard')->middleware('auth');
 
-Route::post('/driver/dashboard', function () {
-    return view('driver.dashboard');
-})->name('driver.dashboard')->middleware('auth');
-
 Route::get('/passenger/dashboard', function () {
     return view('passenger.dashboard');
 })->name('passenger.dashboard')->middleware('auth');
+

@@ -21,4 +21,10 @@ class Driver extends User
         'destination',
         'user_id'
     ];
+
+
+    public function reservation()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }

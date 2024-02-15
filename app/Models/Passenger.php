@@ -14,4 +14,9 @@ class Passenger extends User
     protected $fillable = [
       'user_id'
     ];
+
+    public function reservation()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }

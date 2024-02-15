@@ -19,4 +19,9 @@ class Reservation extends Model
     {
         return $this->belongsTo(Passenger::class);
     }
+
+    public function review()
+    {
+        return $this->hasOne(Review::class);
+    }
 }

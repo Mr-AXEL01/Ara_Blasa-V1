@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('passenger_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('driver_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->string('start_point');
+            $table->string('destination');
+            $table->dateTime('depart_Time');
+            $table->enum('status', ['pending' , 'onRoad' , 'cancelled' , 'completed'])->default('pending');
             $table->timestamps();
         });
     }

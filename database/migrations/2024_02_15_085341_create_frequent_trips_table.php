@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('frequent_trips', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('reservation_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

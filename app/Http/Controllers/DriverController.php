@@ -48,6 +48,7 @@ class DriverController extends Controller
 
         $startPoint = $request->start_point;
         $destination = $request->destination;
+        $departTime = $request->depart_time;
 
         $drivers = Driver::where('start_point', $startPoint)
             ->where('destination', $destination)
@@ -58,6 +59,8 @@ class DriverController extends Controller
             'drivers' => $drivers,
             'startPoint' => $startPoint,
             'destination' => $destination,
+            'depart_time' => $departTime,
         ]);
     }
+
 }

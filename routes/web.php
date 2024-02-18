@@ -31,7 +31,11 @@ Route::middleware('auth' , 'verified')->group(function () {
 
 // ------------driver----------------------
     Route::patch('/driver/update-availability', [DriverController::class, 'updateAvailability'])->name('driver.update.availability');
+    Route::patch('/driver/trip', [DriverController::class, 'updateTrip'])->name('driver.update.trip');
+    Route::get('/search/driver', [DriverController::class, 'search'])->name('search.driver');
 });
+
+Route::post('/reservations', [ReservationController::class, 'store'])->name('reserve.store');
 
 require __DIR__.'/auth.php';
 

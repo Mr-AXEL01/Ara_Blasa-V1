@@ -7,6 +7,7 @@ use App\Models\Driver;
 use App\Models\Passenger;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Cassandra\Exception\ValidationException;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -43,11 +44,15 @@ class RegisteredUserController extends Controller
                 'role' => ['required', Rule::in(['passenger', 'driver'])],
             ]);
 
+
+            $pictureName = time().'.'.$request->file('picture')->extension();
+            $request->file('picture')->storeAs('public/image', $pictureName);
+
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'picture' => $request->file('picture')->store('public/image'),
+                'picture' => $pictureName,
             ]);
 
             if ($request->role == 'driver') {
